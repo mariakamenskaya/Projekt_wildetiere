@@ -38,7 +38,7 @@ vite-project/src/
 ├── App.svelte
 ├── main.js
 └── app.css
-```
+...
 
 ## 💡 Besondere Features
 
