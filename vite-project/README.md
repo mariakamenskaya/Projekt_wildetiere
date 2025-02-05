@@ -1,47 +1,160 @@
-# Svelte + Vite
+# 🎮 Mein Tier-Quartett Projekt
 
-This template should help get you started developing with Svelte in Vite.
+## 👋 Über das Projekt
 
-## Recommended IDE Setup
+Als Studentin habe ich ein digitales Tier-Quartett entwickelt. Das Spiel kombiniert klassisches Quartett mit interessanten Tierfakten und einem modernen Web-Interface.
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+## 🎯 Spielprinzip
 
-## Need an official Svelte framework?
+-   Spieler treten gegeneinander an
+-   Jede Karte zeigt ein Tier mit verschiedenen Eigenschaften (Größe, Gewicht, Alter, etc.)
+-   Spieler wählen eine Eigenschaft, die höchste gewinnt
+-   Gewonnene Karten werden dem eigenen Stapel hinzugefügt
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+## 🔧 Technische Umsetzung
 
-## Technical considerations
+Ich habe das Projekt mit Svelte entwickelt, weil:
 
-**Why use this over SvelteKit?**
+-   Reaktives Verhalten super einfach zu implementieren ist
+-   Komponenten sehr übersichtlich sind
+-   Performance besonders gut ist
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+### 📁 Projektstruktur
 
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
-
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
-
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
-
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `checkJs` in the JS template?**
-
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
 ```
+vite-project/src/
+├── components/
+│   ├── AnimalCard.svelte    # Einzelne Tierkarte
+│   ├── Navigation.svelte    # Menüführung
+│   ├── Header.svelte
+│   └── Footer.svelte
+├── pages/
+│   ├── Home.svelte         # Startseite
+│   ├── Game.svelte        # Hauptspiellogik
+│   └── AnimalsOverview.svelte  # Übersicht aller Tierkarten mit Filter- und Sortierfunktionen
+└── stores/
+    └── gameStore.js       # Spielzustand & Logik
+├── routes.js
+├── App.svelte
+├── main.js
+└── app.css
+```
+
+## 💡 Besondere Features
+
+-   🔍 Dynamische Filterung der Tiere nach Kategorien (Säugetiere, Vögel, etc.)
+-   🎨 Schöne Tier-Illustrationen generiert mit Stable Diffusion
+-   🎲 Zufällige Kartenverteilung zu Spielbeginn
+-   🔄 Automatischer Kartentransfer nach jeder Runde
+-   🏆 Punktestand-Anzeige in Echtzeit
+-   🎮 Einfache Bedienung durch Klick/Touch auf Eigenschaften
+-   🎯 Hervorhebung der gewinnenden Eigenschaft (Feuerwerk)
+-   📱 Responsive Design für Desktop und Mobile
+
+## 🎲 Spielablauf
+
+1. **Startseite (Home.svelte)**
+
+    -Navigation zwischen Startseite, Kartenübersicht und Spielseite
+    -Einleitungstext
+    -Footer mit Bild- und GitHub-Link
+
+2. **Kartenübersicht (AnimalsOverview.svelte)**
+
+    - Alle verfügbaren Karten
+    - Filter- und Sortiermöglichkeiten
+    - Eigenschaften der einzelnen Tiere (zusätzlich zu den Quartettkarten-Eigenschaften)
+
+3. **Spielseite (Game.svelte)**
+
+    - Anzeige der aktuellen Karten
+    - Eigenschaftsauswahl
+    - Punktestand
+    - Spielerverwaltung
+
+## 💪 Meine Erfolge & Herausforderungen
+
+### 🌟 Besonders gut gelungen
+
+#### Animals Overview Page
+
+Die Entwicklung der Tierübersicht war eines meiner Highlights! Ich habe eine dynamische Filterfunktion implementiert, die es ermöglicht, Tiere nach verschiedenen Kategorien zu sortieren. Besonders stolz bin ich auf:
+
+```javascript
+// Meine Filter- und Sortierlösung
+function filterAndSortAnimals(category, sortBy) {
+	// Erst filtern
+	let filtered = animals.filter((animal) =>
+		category === "all" ? true : animal.category === category
+	);
+
+	// Dann intelligent sortieren
+	return filtered.sort((a, b) => {
+		if (sortBy === "name") return a.name.localeCompare(b.name);
+		return b[sortBy] - a[sortBy];
+	});
+}
+```
+
+#### Bildergenerierung mit KI
+
+Die Generierung der Tierbilder mit Stable Diffusion war ein spannendes Teilprojekt:
+
+-   Entwicklung spezieller Prompts für konsistenten Stil
+-   Integration von Bildoptimierung für schnelles Laden
+-   Implementierung von Fallback-Bildern
+-   Erstellung eines einheitlichen, cartoon-artigen Looks
+
+### 😅 Herausforderungen
+
+#### Spiellogik Komplexität
+
+Die größte Herausforderung war definitiv die Spiellogik. Hier hatte ich einige knifflige Momente:
+
+```javascript
+// Komplexe Spiellogik für den Vergleich der Karten
+function compareCards(playerCard, computerCard, selectedProperty) {
+	// Prüfen ob die ausgewählte Eigenschaft existiert
+	if (
+		!(selectedProperty in playerCard) ||
+		!(selectedProperty in computerCard)
+	) {
+		throw new Error("Ungültige Eigenschaft ausgewählt");
+	}
+
+	// Werte der Karten für die ausgewählte Eigenschaft vergleichen
+	const playerValue = playerCard[selectedProperty];
+	const computerValue = computerCard[selectedProperty];
+
+	// Gewinner ermitteln
+	if (playerValue > computerValue) {
+		return "player";
+	} else if (computerValue > playerValue) {
+		return "computer";
+	} else {
+		return "draw";
+	}
+}
+```
+
+Besondere Schwierigkeiten hatte ich mit:
+
+-   🎲 Synchronisation der Spielzüge
+-   🔄 Korrekter Kartentransfer nach Rundenende
+
+Durch viel Recherche und einige Refactoring-Runden habe ich die Probleme schließlich gelöst, aber es war definitiv der anspruchsvollste Teil des Projekts!
+
+## 🎨 Design-Entscheidungen
+
+-   Kartendesign im Retro-Stil
+-   Stapel-Effekt für Karten
+-   Responsive Layout für Mobile Gaming
+
+## 🔜 Geplante Erweiterungen
+
+-   Animationen für Kartenbewegungen
+-   Neue Tierkarten und Kategorien
+-   Statistik-System
+-   Achievement-System
+
+Vielen Dank für eure Aufmerksamkeit!
