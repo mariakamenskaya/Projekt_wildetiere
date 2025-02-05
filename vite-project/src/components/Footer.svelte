@@ -1,5 +1,5 @@
 <script>
-	const githubLink = "https://github.com/IhrBenutzername/IhrProjektname";
+	const githubLink = "https://github.com/mariakamenskaya/Projekt_wildetiere";
 	const rawPixelLink =
 		"https://www.rawpixel.com/image/581179/hand-drawn-wild-animals";
 </script>
