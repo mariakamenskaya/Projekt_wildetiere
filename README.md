@@ -48,7 +48,7 @@ vite-project/src/
 -   🔄 Automatischer Kartentransfer nach jeder Runde
 -   🏆 Punktestand-Anzeige in Echtzeit
 -   🎮 Einfache Bedienung durch Klick/Touch auf Eigenschaften
--   🎯 Hervorhebung der gewinnenden Eigenschaft (Feuerwerk)
+-   🎯 Hervorhebung der gewinnenden Eigenschaft 
 -   📱 Responsive Design für Desktop und Mobile
 
 ## 🎲 Spielablauf
